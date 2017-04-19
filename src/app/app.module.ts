@@ -15,11 +15,7 @@ import { SitePage } from '../pages/site-page/site-page';
 
 @NgModule({
   declarations: [
-    MyApp,
-    LoginPage,
-    MapsPage,
-    SettingsPage,
-    SitePage
+    MyApp
   ],
   imports: [
     BrowserModule,
