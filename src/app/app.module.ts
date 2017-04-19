@@ -4,6 +4,10 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { GoogleMaps } from '@ionic-native/google-maps';
+import { SerialService } from '../providers/serial-service';
+import { Serial } from '@ionic-native/serial';
+import { HttpModule } from '@angular/http';
+
 
 import { MyApp } from './app.component';
 
@@ -15,10 +19,15 @@ import { SitePage } from '../pages/site-page/site-page';
 
 @NgModule({
   declarations: [
-    MyApp
+    MyApp,    
+    LoginPage,
+    MapsPage,
+    SettingsPage,
+    SitePage
   ],
   imports: [
     BrowserModule,
+    HttpModule,    
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -33,6 +42,8 @@ import { SitePage } from '../pages/site-page/site-page';
     StatusBar,
     SplashScreen,
     GoogleMaps,
+    SerialService,
+    Serial,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
