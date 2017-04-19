@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MapsPage } from '../maps-page/maps-page';
+import { MyApp } from '../../app/app.component';
+import { SerialService } from '../../providers/serial-service';
 
-/**
- * Generated class for the LoginPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-login-page',
@@ -15,15 +11,29 @@ import { MapsPage } from '../maps-page/maps-page';
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private serialService: SerialService) {
   }
 
-  ionViewDidLoad() {
-    // console.log('ionViewDidLoad LoginPage');
-  }
+    ngAfterViewInit() {
+        console.log('ionViewDidLoad LoginPage');
+        // create a new map by passing HTMLElement
+        let element: HTMLElement = document.getElementById('logger');
+        this.serialService.readyRead().subscribe(
+            (data) => {//success callback
+                var view = new Uint8Array(data);
+                element.innerHTML += view;
+            },
+            () => {//error callback
 
-  checkLogin() {
-      this.navCtrl.setRoot(MapsPage);
-  }
+            },
+            () => {}//complete callback
+        );
+        
+    }
+    
+
+    checkLogin() {
+        this.navCtrl.setRoot(MapsPage);
+    }
 
 }
